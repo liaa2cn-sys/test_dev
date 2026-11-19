@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>西安旅游攻略｜一页读懂长安（离线单页）</title>
+<meta name="description" content="西安自由行攻略：城市概览、必去景点、1/2/3 日经典路线、美食、交通住宿、最佳季节与实用避坑。纯静态单页，离线可读。">
+<meta name="theme-color" content="#1A1714">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxQTE3MTQiLz48cmVjdCB4PSIxMCIgeT0iMTAiIHdpZHRoPSI0NCIgaGVpZ2h0PSI0NCIgcng9IjgiIGZpbGw9IiM5RTJCMjUiIHN0cm9rZT0iI0M5QTIyNyIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iMzIiIHk9IjQ0IiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtc2l6ZT0iMzIiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGQUY2RUMiPuilvzwvdGV4dD48L3N2Zz4=">
+<style>
+/* ========== 01. 设计令牌与基础样式 ========== */
+:root{
+  --ink:#1A1714;
+  --ink-2:#3A342C;
+  --muted:#5B5348;
+  --paper:#FAF6EC;
+  --paper-2:#F5EFE3;
+  --card:#FFFDF7;
+  --red:#9E2B25;
+  --red-deep:#7E211C;
+  --gold:#C9A227;
+  --gold-soft:#E3C766;
+  --jade:#5C6B5A;
+  --jade-deep:#465242;
+  --line:#E3D9C4;
+  --maxw:1180px;
+  --radius:14px;
+  --shadow:0 10px 30px rgba(26,23,20,.08);
+  --shadow-sm:0 4px 14px rgba(26,23,20,.06);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  color:var(--ink);
+  background-color:var(--paper);
+  background-image:
+    radial-gradient(circle at 12% 8%,rgba(201,162,39,.08),transparent 34%),
+    radial-gradient(circle at 88% 72%,rgba(158,43,37,.06),transparent 38%),
+    repeating-linear-gradient(0deg,rgba(91,83,72,.025) 0,rgba(91,83,72,.025) 1px,transparent 1px,transparent 4px);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px;
+  line-height:1.75;
+  overflow-wrap:anywhere;
+}
+h1,h2,h3,h4,h5{
+  margin:0;
+  color:var(--ink);
+  font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  font-weight:700;
+  line-height:1.28;
+  letter-spacing:.01em;
+}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
+ul,ol{margin:0 0 1em;padding-left:1.25em}
+li{margin:.3em 0}
+a{color:var(--red-deep);text-decoration-thickness:1px;text-underline-offset:3px}
+strong{font-weight:700}
+small{font-size:.82rem}
+svg{max-width:100%;height:auto}
+::selection{background:rgba(201,162,39,.35);color:var(--ink)}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px;border-radius:4px}
+.site-header :focus-visible,.hero :focus-visible,.site-footer :focus-visible{outline-color:var(--gold-soft)}
+.container{
+  width:100%;
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding-inline:clamp(16px,4vw,40px);
+}
+.skip-link{
+  position:absolute;
+  left:12px;
+  top:-80px;
+  z-index:200;
+  padding:10px 16px;
+  background:var(--gold-soft);
+  color:var(--ink);
+  font-weight:700;
+  text-decoration:none;
+  border-radius:0 0 10px 10px;
+  transition:top .15s ease;
+}
+.skip-link:focus{top:0}
+.section{padding-block:clamp(52px,8vw,86px)}
+.section--tint{
+  background:linear-gradient(180deg,rgba(245,239,227,.75),rgba(245,239,227,.95));
+  border-block:1px solid var(--line);
+}
+section[id],#main{scroll-margin-top:84px}
+
+/* ========== 02. 顶部导航 ========== */
+.site-header{
+  position:static;
+  background:var(--ink);
+  color:var(--paper);
+  border-bottom:1px solid rgba(201,162,39,.38);
+}
+.js-nav .site-header{position:sticky;top:0;z-index:50;box-shadow:0 6px 22px rgba(26,23,20,.18)}
+.header-inner{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  min-height:64px;
+  padding-block:8px;
+}
+.brand{
+  display:inline-flex;
+  align-items:center;
+  gap:11px;
+  min-height:48px;
+  color:var(--paper);
+  text-decoration:none;
+  flex:0 0 auto;
+}
+.brand-seal{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:38px;
+  height:38px;
+  flex:0 0 38px;
+  border:1px solid var(--gold);
+  border-radius:8px;
+  background:linear-gradient(145deg,var(--red),var(--red-deep));
+  color:var(--paper);
+  font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  font-size:1.25rem;
+  line-height:1;
+  box-shadow:inset 0 0 0 2px rgba(250,246,236,.12);
+}
+.brand-text{display:flex;flex-direction:column;line-height:1.12}
+.brand-text strong{font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;font-size:1.06rem;letter-spacing:.08em}
+.brand-text small{color:rgba(250,246,236,.62);font-size:.68rem;letter-spacing:.16em;margin-top:3px}
+.site-nav{display:block}
+.site-nav ul{display:flex;flex-wrap:wrap;align-items:center;gap:2px 20px;list-style:none;margin:0;padding:0}
+.site-nav a{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  color:rgba(250,246,236,.88);
+  text-decoration:none;
+  font-size:.94rem;
+  border-bottom:2px solid transparent;
+  transition:color .15s ease,border-color .15s ease;
+}
+.site-nav a:hover{color:var(--gold-soft);border-bottom-color:var(--gold)}
+.nav-toggle{display:none}
+.js-nav .nav-toggle{display:none}
+
+/* ========== 03. 首页主视觉 ========== */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding-block:clamp(52px,8vw,88px) clamp(96px,13vw,148px);
+  color:var(--paper);
+  background:
+    radial-gradient(ellipse at 82% 16%,rgba(201,162,39,.24),transparent 34%),
+    radial-gradient(ellipse at 12% 90%,rgba(158,43,37,.45),transparent 48%),
+    linear-gradient(138deg,#12100E 0%,#221915 48%,#4A1D19 100%);
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(45deg,transparent 0 22px,rgba(201,162,39,.055) 22px 23px),
+    repeating-linear-gradient(-45deg,transparent 0 34px,rgba(250,246,236,.035) 34px 35px);
+  pointer-events:none;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  right:-110px;
+  top:-120px;
+  width:min(46vw,520px);
+  aspect-ratio:1;
+  border:1px solid rgba(201,162,39,.3);
+  border-radius:50%;
+  box-shadow:0 0 0 26px rgba(201,162,39,.045),0 0 0 52px rgba(201,162,39,.03);
+  pointer-events:none;
+}
+.hero-inner{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);
+  gap:clamp(24px,4vw,46px);
+  align-items:center;
+}
+.hero-eyebrow{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:0 0 18px;
+  color:var(--gold-soft);
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+.hero-eyebrow::before{content:"";width:38px;height:1px;background:var(--gold);flex:0 0 38px}
+.hero h1{
+  color:var(--paper);
+  font-size:clamp(2.55rem,7.4vw,5rem);
+  line-height:1.08;
+  letter-spacing:.04em;
+  text-shadow:0 6px 28px rgba(0,0,0,.24);
+}
+.hero-sub{
+  max-width:38em;
+  margin:20px 0 0;
+  color:rgba(250,246,236,.84);
+  font-size:clamp(1rem,1.7vw,1.12rem);
+  line-height:1.9;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:10px 20px;
+  border-radius:999px;
+  border:1px solid transparent;
+  font-weight:700;
+  font-size:.94rem;
+  text-decoration:none;
+  transition:transform .15s ease,background-color .15s ease,border-color .15s ease,color .15s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--gold-soft);color:var(--ink);border-color:var(--gold-soft)}
+.btn-primary:hover{background:#F0D987}
+.btn-ghost{background:transparent;color:var(--paper);border-color:rgba(250,246,236,.45)}
+.btn-ghost:hover{border-color:var(--gold-soft);color:var(--gold-soft)}
+.hero-card{
+  padding:clamp(18px,2.4vw,26px);
+  border:1px solid rgba(201,162,39,.42);
+  border-radius:var(--radius);
+  background:linear-gradient(160deg,rgba(250,246,236,.10),rgba(250,246,236,.035));
+  box-shadow:0 18px 42px rgba(0,0,0,.2);
+  backdrop-filter:blur(2px);
+}
+.hero-card-title{
+  margin:0 0 12px;
+  color:var(--gold-soft);
+  font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  font-size:1.16rem;
+  font-weight:700;
+  letter-spacing:.12em;
+}
+.hero-card ul{list-style:none;margin:0;padding:0}
+.hero-card li{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  padding:9px 0;
+  border-bottom:1px dashed rgba(250,246,236,.16);
+  font-size:.86rem;
+  color:rgba(250,246,236,.76);
+}
+.hero-card li:last-child{border-bottom:0}
+.hero-card b{color:var(--paper);font-weight:600;white-space:nowrap}
+.hero-card-foot{
+  margin:14px 0 0;
+  padding-top:13px;
+  border-top:1px solid rgba(201,162,39,.3);
+  color:rgba(250,246,236,.58);
+  font-size:.74rem;
+  letter-spacing:.04em;
+}
+.hero-wall{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-1px;
+  z-index:1;
+  height:clamp(42px,6vw,74px);
+  background:
+    linear-gradient(to top,#0F0D0B 0 58%,transparent 58%),
+    repeating-linear-gradient(90deg,#0F0D0B 0 46px,transparent 46px 78px);
+  background-size:100% 100%,100% 42%;
+  background-position:0 100%,0 0;
+  background-repeat:no-repeat;
+  opacity:.58;
+  pointer-events:none;
+}
+
+/* ========== 04. 板块标题与通用卡片 ========== */
+.section-head{max-width:760px;margin-bottom:clamp(24px,4vw,38px)}
+.section-index{
+  margin:0 0 8px;
+  color:var(--red);
+  font-size:.76rem;
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+.section-head h2{
+  font-size:clamp(1.7rem,4.2vw,2.55rem);
+  letter-spacing:.03em;
+}
+.section-head h2::after{
+  content:"";
+  display:block;
+  width:54px;
+  height:3px;
+  margin-top:14px;
+  background:linear-gradient(90deg,var(--red),var(--gold));
+  border-radius:99px;
+}
+.section-lead{max-width:64ch;margin:16px 0 0;color:var(--muted);font-size:1rem}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,272px),1fr));gap:20px}
+.card-grid>*{min-width:0}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+}
+.sight-card,.food-card,.transport-card,.lodging-card,.season-card,.mini-card{
+  position:relative;
+  padding:clamp(18px,2.3vw,24px);
+  min-width:0;
+}
+.sight-card,.food-card,.transport-card,.lodging-card,.season-card,.mini-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+}
+@media (hover:hover){
+  .sight-card,.food-card,.transport-card,.lodging-card,.season-card,.mini-card{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+  .sight-card:hover,.food-card:hover,.transport-card:hover,.lodging-card:hover,.season-card:hover,.mini-card:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow);
+    border-color:#D4C5A5;
+  }
+}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.num{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:34px;
+  height:34px;
+  padding-inline:8px;
+  border-radius:8px;
+  background:var(--ink);
+  color:var(--gold-soft);
+  font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  font-size:.82rem;
+  letter-spacing:.08em;
+}
+.tag{
+  display:inline-flex;
+  align-items:center;
+  min-height:24px;
+  padding:2px 9px;
+  border:1px solid rgba(158,43,37,.2);
+  border-radius:999px;
+  background:rgba(158,43,37,.075);
+  color:var(--red-deep);
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.06em;
+  white-space:nowrap;
+}
+.tag--jade{border-color:rgba(92,107,90,.28);background:rgba(92,107,90,.10);color:var(--jade-deep)}
+.tag--gold{border-color:rgba(201,162,39,.55);background:rgba(201,162,39,.16);color:var(--red-deep)}
+.card h3{font-size:1.22rem;margin-bottom:5px}
+.card-tagline{margin:0 0 10px;color:var(--red-deep);font-size:.86rem;font-weight:600;letter-spacing:.02em}
+.card p{color:var(--ink-2);font-size:1rem}
+.note{
+  margin:clamp(22px,3.4vw,32px) 0 0;
+  padding:13px 16px;
+  border-left:3px solid var(--gold);
+  border-radius:0 8px 8px 0;
+  background:rgba(201,162,39,.09);
+  color:var(--ink-2);
+  font-size:.86rem;
+}
+.note strong{color:var(--red-deep)}
+.card-meta{
+  margin:14px 0 0;
+  padding-top:10px;
+  border-top:1px solid var(--line);
+  color:var(--muted)!important;
+  font-size:.76rem!important;
+  line-height:1.6;
+}
+
+/* ========== 05. 城市概览 ========== */
+.overview-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,.75fr);gap:clamp(22px,3.5vw,36px);align-items:start}
+.overview-copy{min-width:0}
+.overview-copy p{color:var(--ink-2)}
+.overview-copy p:first-child::first-letter{
+  float:left;
+  margin:.08em .12em 0 0;
+  color:var(--red);
+  font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  font-size:3.15rem;
+  line-height:.86;
+  font-weight:700;
+}
+.quote{
+  margin:22px 0 0;
+  padding:18px 20px;
+  border:1px solid var(--line);
+  border-left:4px solid var(--red);
+  border-radius:0 10px 10px 0;
+  background:linear-gradient(135deg,rgba(158,43,37,.07),rgba(201,162,39,.06));
+  color:var(--ink);
+  font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  font-size:1.02rem;
+  line-height:1.8;
+}
+.quote strong{color:var(--red-deep)}
+.fact-panel{
+  padding:clamp(18px,2.4vw,24px);
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  min-width:0;
+}
+.fact-panel h3{font-size:1.12rem;margin-bottom:12px}
+.fact-list{margin:0;padding:0}
+.fact-list>div{display:grid;grid-template-columns:5.2em minmax(0,1fr);gap:10px;padding:9px 0;border-bottom:1px dashed var(--line)}
+.fact-list>div:last-child{border-bottom:0;padding-bottom:0}
+.fact-list dt{color:var(--muted);font-size:.78rem;font-weight:700;letter-spacing:.04em}
+.fact-list dd{margin:0;color:var(--ink-2);font-size:.92rem}
+.mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:16px;margin-top:24px}
+.mini-card h3{font-size:1.02rem;margin-bottom:6px}
+.mini-card p{font-size:.88rem;margin:0;color:var(--muted)}
+
+/* ========== 06. 景点卡片 ========== */
+.sights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,282px),1fr));gap:20px}
+.sight-card{display:flex;flex-direction:column}
+.sight-card>p{flex:0 0 auto}
+.card-facts{
+  margin:14px 0 0;
+  padding:12px 0 0;
+  border-top:1px dashed var(--line);
+  display:grid;
+  gap:9px;
+}
+.card-facts>div{display:grid;grid-template-columns:4.2em minmax(0,1fr);gap:8px;min-width:0}
+.card-facts dt{color:var(--red-deep);font-size:.76rem;font-weight:700;letter-spacing:.04em}
+.card-facts dd{margin:0;color:var(--ink-2);font-size:.84rem;line-height:1.65;min-width:0}
+.card-facts dd strong{color:var(--ink)}
+
+/* ========== 07. 路线时间线 ========== */
+.route-list{display:grid;gap:22px}
+.route-card{
+  padding:clamp(20px,2.8vw,30px);
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  min-width:0;
+}
+.route-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px 20px;
+  padding-bottom:16px;
+  border-bottom:2px solid rgba(158,43,37,.16);
+}
+.route-title-wrap{min-width:0}
+.route-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:26px;
+  padding:2px 11px;
+  margin-bottom:8px;
+  border-radius:999px;
+  background:var(--red);
+  color:var(--paper);
+  font-size:.76rem;
+  font-weight:700;
+  letter-spacing:.08em;
+}
+.route-head h3{font-size:clamp(1.18rem,2.2vw,1.42rem)}
+.route-fit{
+  max-width:31em;
+  margin:0;
+  padding:9px 12px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:var(--paper);
+  color:var(--muted);
+  font-size:.8rem;
+  line-height:1.65;
+}
+.route-fit strong{color:var(--red-deep)}
+.route-day{padding-block:18px;border-bottom:1px dashed var(--line)}
+.route-day:last-of-type{border-bottom:0;padding-bottom:8px}
+.route-day>h4{font-size:1.02rem;color:var(--red-deep);margin-bottom:12px;letter-spacing:.05em}
+.timeline{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.timeline li{
+  min-width:0;
+  padding:14px 15px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:linear-gradient(180deg,var(--paper) 0%,#FBF7EE 100%);
+}
+.time{
+  display:inline-block;
+  margin-bottom:7px;
+  padding:2px 10px;
+  border:1px solid rgba(201,162,39,.55);
+  border-radius:999px;
+  background:rgba(201,162,39,.14);
+  color:var(--red-deep);
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.12em;
+}
+.timeline h4,.timeline h5{
+  font-size:1rem;
+  line-height:1.45;
+  margin-bottom:3px;
+  color:var(--ink);
+}
+.timeline p{font-size:1rem;color:var(--ink-2);margin:0}
+.transit{
+  margin-top:7px!important;
+  padding-top:7px;
+  border-top:1px dashed var(--line);
+  color:var(--muted)!important;
+  font-size:.78rem!important;
+}
+.route-foot{margin-top:14px;padding-top:12px;border-top:2px solid rgba(201,162,39,.22)}
+.route-foot p{font-size:.85rem;color:var(--ink-2)}
+.route-foot .card-meta{border-top:0;padding-top:4px}
+
+/* ========== 08. 美食 ========== */
+.food-feature{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);
+  gap:clamp(20px,3.2vw,34px);
+  padding:clamp(22px,3.4vw,34px);
+  border-radius:var(--radius);
+  color:var(--paper);
+  background:
+    radial-gradient(ellipse at 88% 8%,rgba(201,162,39,.24),transparent 36%),
+    linear-gradient(135deg,#1A1714 0%,#2B1B17 58%,#4A1D19 100%);
+  box-shadow:var(--shadow);
+}
+.food-feature::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 30px,rgba(201,162,39,.06) 30px 31px);
+  pointer-events:none;
+}
+.food-feature>*{position:relative;z-index:1;min-width:0}
+.food-feature h3{color:var(--paper);font-size:clamp(1.25rem,2.5vw,1.55rem);margin:10px 0 10px}
+.food-feature p{color:rgba(250,246,236,.82);font-size:.93rem}
+.food-tips{list-style:none;margin:0;padding:0;display:grid;gap:8px;align-content:start}
+.food-tips li{
+  position:relative;
+  margin:0;
+  padding:9px 11px 9px 34px;
+  border:1px solid rgba(201,162,39,.28);
+  border-radius:8px;
+  background:rgba(250,246,236,.055);
+  color:rgba(250,246,236,.88);
+  font-size:.82rem;
+  line-height:1.55;
+}
+.food-tips li::before{
+  content:"";
+  position:absolute;
+  left:13px;
+  top:14px;
+  width:9px;
+  height:9px;
+  border:2px solid var(--gold-soft);
+  border-radius:50%;
+}
+.food-grid{margin-top:22px}
+.food-card{display:flex;flex-direction:column}
+.food-card h3{font-size:1.16rem}
+.food-facts{margin:12px 0 0;padding:12px 0 0;border-top:1px dashed var(--line);display:grid;gap:8px}
+.food-facts>div{display:grid;grid-template-columns:3.5em minmax(0,1fr);gap:8px;min-width:0}
+.food-facts dt{color:var(--red-deep);font-size:.74rem;font-weight:700;letter-spacing:.04em}
+.food-facts dd{margin:0;color:var(--ink-2);font-size:.92rem;line-height:1.62;min-width:0}
+.food-facts .spicy{color:var(--red-deep);font-weight:700}
+
+/* ========== 09. 交通与住宿 ========== */
+.transport-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:20px}
+.transport-card h3{font-size:1.12rem;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.check-list{list-style:none;margin:0;padding:0}
+.check-list li{position:relative;margin:0;padding:5px 0 5px 19px;color:var(--ink-2);font-size:.95rem;line-height:1.68}
+.check-list li::before{
+  content:"";
+  position:absolute;
+  left:1px;
+  top:14px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 0 3px rgba(201,162,39,.14);
+}
+.subhead{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:8px 20px;
+  margin:clamp(30px,5vw,44px) 0 16px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--line);
+}
+.subhead h3{font-size:clamp(1.18rem,2.3vw,1.42rem)}
+.subhead p{margin:0;color:var(--muted);font-size:.82rem}
+.lodging-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr));gap:16px}
+.lodging-card h4{font-size:1.06rem;margin-bottom:10px}
+.lodging-card dl{margin:0;display:grid;gap:7px}
+.lodging-card dt{color:var(--red-deep);font-size:.73rem;font-weight:700;letter-spacing:.04em}
+.lodging-card dd{margin:0 0 3px;color:var(--ink-2);font-size:.92rem;line-height:1.62}
+
+/* ========== 10. 季节与避坑 ========== */
+.season-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:16px}
+.season-card h4{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-size:1.05rem;margin-bottom:8px}
+.season-card h4 span{color:var(--red-deep);font-size:.72rem;font-weight:700;letter-spacing:.05em;white-space:nowrap}
+.season-card p{font-size:.95rem;margin:0;color:var(--ink-2)}
+.pitfalls{
+  list-style:none;
+  counter-reset:pitfall;
+  margin:22px 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.pitfalls li{
+  counter-increment:pitfall;
+  position:relative;
+  margin:0;
+  min-width:0;
+  padding:14px 15px 14px 52px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--card);
+  box-shadow:var(--shadow-sm);
+}
+.pitfalls li::before{
+  content:counter(pitfall,decimal-leading-zero);
+  position:absolute;
+  left:14px;
+  top:14px;
+  color:var(--red);
+  font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  font-size:1.05rem;
+  font-weight:700;
+  line-height:1;
+}
+.pitfalls strong{display:block;margin-bottom:3px;font-size:.9rem;color:var(--ink)}
+.pitfalls span{display:block;color:var(--muted);font-size:.92rem;line-height:1.62}
+.emergency{
+  margin-top:clamp(28px,4vw,40px);
+  padding:clamp(20px,3vw,30px);
+  border:1px solid rgba(201,162,39,.4);
+  border-radius:var(--radius);
+  background:linear-gradient(135deg,#1A1714,#2A1A16);
+  color:var(--paper);
+  box-shadow:var(--shadow);
+}
+.emergency h3{color:var(--gold-soft);font-size:1.14rem;margin-bottom:8px}
+.emergency p{color:rgba(250,246,236,.76);font-size:.86rem}
+.emergency ul{
+  list-style:none;
+  margin:12px 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:8px;
+}
+.emergency li{
+  margin:0;
+  padding:8px 10px;
+  border:1px solid rgba(250,246,236,.16);
+  border-radius:8px;
+  color:rgba(250,246,236,.86);
+  font-size:.8rem;
+  background:rgba(250,246,236,.04);
+}
+.emergency li strong{color:var(--gold-soft);font-size:1rem;letter-spacing:.03em}
+.checklist{
+  margin-top:18px;
+  padding:18px 20px;
+  border:1px dashed #C9B98F;
+  border-radius:10px;
+  background:rgba(201,162,39,.065);
+}
+.checklist h3{font-size:.98rem;margin-bottom:7px;color:var(--red-deep)}
+.checklist ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:7px}
+.checklist li{
+  margin:0;
+  padding:4px 10px;
+  border:1px solid rgba(201,162,39,.38);
+  border-radius:999px;
+  background:var(--card);
+  color:var(--ink-2);
+  font-size:.78rem;
+}
+
+/* ========== 11. 页脚 ========== */
+.site-footer{
+  position:relative;
+  padding-block:clamp(36px,6vw,56px);
+  color:rgba(250,246,236,.76);
+  background:linear-gradient(135deg,#14110F,#1E1714);
+  border-top:1px solid rgba(201,162,39,.38);
+}
+.footer-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(22px,4vw,42px);align-items:start}
+.footer-brand{
+  margin:0 0 8px;
+  color:var(--gold-soft);
+  font-family:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  font-size:1.2rem;
+  font-weight:700;
+  letter-spacing:.1em;
+}
+.site-footer p{font-size:.82rem;line-height:1.75;color:rgba(250,246,236,.68)}
+.site-footer strong{color:var(--paper)}
+.footer-note{padding:12px 14px;border:1px solid rgba(201,162,39,.24);border-radius:9px;background:rgba(201,162,39,.055)}
+.footer-top{margin-top:12px}
+.footer-top a{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  color:var(--gold-soft);
+  font-weight:700;
+  text-decoration:none;
+  border-bottom:1px solid rgba(227,199,102,.45);
+}
+.footer-top a:hover{color:var(--paper);border-bottom-color:var(--paper)}
+.footer-bottom{
+  margin-top:clamp(22px,4vw,34px);
+  padding-top:16px;
+  border-top:1px solid rgba(250,246,236,.12);
+  color:rgba(250,246,236,.62);
+  font-size:.75rem;
+}
+
+/* ========== 12. 动效与响应式 ========== */
+.reveal{opacity:1;transform:none}
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .4s ease,transform .4s ease}
+.js .reveal.is-visible{opacity:1;transform:none}
+@media (max-width:900px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-card{max-width:560px}
+  .overview-grid{grid-template-columns:1fr}
+  .food-feature{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .timeline{grid-template-columns:1fr}
+  .pitfalls{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .js-nav .nav-toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    min-width:64px;
+    min-height:44px;
+    padding:8px 12px;
+    border:1px solid rgba(201,162,39,.45);
+    border-radius:8px;
+    background:rgba(250,246,236,.04);
+    color:var(--paper);
+    font:inherit;
+    font-size:.86rem;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .js-nav .nav-toggle:hover{border-color:var(--gold-soft);color:var(--gold-soft)}
+  .nav-toggle-icon{
+    display:inline-block;
+    width:14px;
+    height:10px;
+    border-top:2px solid currentColor;
+    border-bottom:2px solid currentColor;
+  }
+  .js-nav .site-nav{display:none}
+  .js-nav .site-nav.is-open{
+    display:block;
+    position:absolute;
+    left:0;
+    right:0;
+    top:100%;
+    z-index:60;
+    padding:10px clamp(16px,4vw,40px) 18px;
+    border-top:1px solid rgba(201,162,39,.32);
+    border-bottom:1px solid rgba(201,162,39,.32);
+    background:var(--ink);
+    box-shadow:0 18px 30px rgba(0,0,0,.28);
+    max-height:calc(100vh - 64px);
+    max-height:calc(100dvh - 64px);
+    overflow-y:auto;
+    overscroll-behavior:contain;
+  }
+  .js-nav .site-nav.is-open ul{display:flex;flex-direction:column;gap:0}
+  .js-nav .site-nav.is-open li{width:100%;margin:0}
+  .js-nav .site-nav.is-open a{
+    display:flex;
+    width:100%;
+    min-height:46px;
+    padding:9px 2px;
+    border-bottom:1px solid rgba(250,246,236,.10);
+  }
+  .js-nav .site-nav.is-open li:last-child a{border-bottom:0}
+  .brand-text small{display:none}
+  .hero{padding-top:44px}
+  .hero::after{right:-150px;top:-90px;width:320px}
+  .hero-card li{font-size:.82rem}
+  .section{padding-block:48px}
+  .fact-list>div,.card-facts>div,.food-facts>div{grid-template-columns:1fr;gap:2px}
+  .card-facts dt,.food-facts dt{margin-top:2px}
+  .route-fit{max-width:none;width:100%}
+}
+@media (max-width:420px){
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .btn{width:100%}
+  .hero h1{font-size:2.45rem}
+  .brand-seal{width:34px;height:34px;flex-basis:34px}
+  .brand-text strong{font-size:1rem}
+  .pitfalls li{padding-left:46px}
+  .pitfalls li::before{left:11px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none;transition:none}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+@media print{
+  .site-header,.skip-link,.hero-actions,.footer-top,.nav-toggle{display:none!important}
+  body{background:#fff;color:#000;font-size:12pt}
+  .hero{background:#fff;color:#000;padding:0 0 18px}
+  .hero::before,.hero::after,.hero-wall,.food-feature::before{display:none}
+  .hero h1,.hero-sub,.hero-eyebrow{color:#000}
+  .hero-card,.food-feature,.emergency{color:#000;background:#fff;border:1px solid #999;box-shadow:none}
+  .hero-card b,.hero-card li,.food-feature p,.food-feature h3,.emergency h3,.emergency p,.emergency li{color:#000}
+  .section{padding-block:18px}
+  .reveal,.js .reveal{opacity:1!important;transform:none!important}
+  .card,.sight-card,.food-card,.transport-card,.lodging-card,.season-card,.route-card,.mini-card,.pitfalls li{box-shadow:none;break-inside:avoid}
+}
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#top" aria-label="长安一页，回到页面顶部">
+      <span class="brand-seal" aria-hidden="true">西</span>
+      <span class="brand-text"><strong>长安一页</strong><small>XI'AN · 自由行攻略</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="打开导航菜单">
+      <span class="nav-toggle-icon" aria-hidden="true"></span>
+      <span class="nav-toggle-label">菜单</span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <ul>
+        <li><a href="#overview">城市概览</a></li>
+        <li><a href="#sights">必去景点</a></li>
+        <li><a href="#routes">经典路线</a></li>
+        <li><a href="#food">美食推荐</a></li>
+        <li><a href="#transport">交通住宿</a></li>
+        <li><a href="#tips">季节避坑</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- ========== 首页主视觉 ========== -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="hero-eyebrow">XI'AN · 长安</p>
+        <h1 id="hero-title">一页读懂长安</h1>
+        <p class="hero-sub">从兵马俑的军阵到城墙上的风，从回民街的烟火到大唐不夜城的灯火——把第一次西安自由行需要的信息，收进一张离线可读的长页。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#routes">先看经典路线</a>
+          <a class="btn btn-ghost" href="#sights">直达必去景点</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="攻略速览">
+        <p class="hero-card-title">攻略速览</p>
+        <ul>
+          <li><span>建议停留</span><b>2–3 天</b></li>
+          <li><span>最佳季节</span><b>3–5 / 9–11 月</b></li>
+          <li><span>住宿首选</span><b>钟楼 · 永宁门</b></li>
+          <li><span>必先预约</span><b>兵马俑 · 陕历博</b></li>
+          <li><span>步行强度</span><b>中高</b></li>
+        </ul>
+        <p class="hero-card-foot">信息基准 2026-11 · 动态信息以官方公告为准</p>
+      </aside>
+    </div>
+    <div class="hero-wall" aria-hidden="true"></div>
+  </section>
+
+  <!-- ========== 壹 · 城市概览 ========== -->
+  <section id="overview" class="section" aria-labelledby="overview-title">
+    <div class="container">
+      <header class="section-head reveal">
+        <p class="section-index">壹 · CITY</p>
+        <h2 id="overview-title">城市概览</h2>
+        <p class="section-lead">西安古称长安，是陕西省省会，也是中国历史上建都时间最长、影响力最大的古都之一。周、秦、汉、唐都在这里留下城市印记；今天的西安，一边是城墙、塔寺与博物馆，一边是地铁、商圈和夜市。</p>
+      </header>
+      <div class="overview-grid">
+        <div class="overview-copy reveal">
+          <p>第一次来西安，最省力的理解方式是把城市分成三条线：<strong>东线</strong>（临潼：兵马俑、华清宫）、<strong>中轴老城</strong>（城墙、钟鼓楼、回民街）、<strong>曲江人文</strong>（大雁塔、大唐不夜城、陕西历史博物馆、小雁塔）。把同一条线上的点放在同一天，少折返，也更容易给每个景点留出体力和排队时间。</p>
+          <p>西安适合自由行，也适合带父母孩子慢走。地铁和网约车都方便，但东线景点体量大、步行多，建议给兵马俑留出半天；城墙、回民街和大唐不夜城则适合放在下午到晚上。若只有一天，优先东线；若有两天以上，再把老城和曲江补上。</p>
+          <p>这座城市真正的魅力不只在“打卡”，而在节奏：早上看秦的军阵，下午在明城墙上吹风，傍晚钻进回民街的巷子，夜里再看一眼唐风灯火。把行程排松一点，比多塞两个景点更值得。</p>
+          <blockquote class="quote"><strong>一句话建议：</strong>第一次来，按“东线 1 天 + 老城/曲江 1–2 天”排，先锁定兵马俑和陕西历史博物馆的预约，再围绕预约时段安排其余行程。</blockquote>
+        </div>
+        <aside class="fact-panel reveal" aria-label="行前快速事实">
+          <h3>行前快速事实</h3>
+          <dl class="fact-list">
+            <div><dt>建议停留</dt><dd>3 天 2 晚较舒服；2 天可抓重点，1 天只走东线。</dd></div>
+            <div><dt>最佳季节</dt><dd>春季 3–5 月、秋季 9–11 月；夏季避开正午暴晒。</dd></div>
+            <div><dt>住宿首选</dt><dd>钟楼/永宁门地铁沿线，去老城和东线都相对顺手。</dd></div>
+            <div><dt>必先预约</dt><dd>兵马俑、陕西历史博物馆等热门场馆，走官方渠道。</dd></div>
+            <div><dt>体力提示</dt><dd>东线与城墙步行量大，穿舒适鞋，给老人孩子留休息时间。</dd></div>
+            <div><dt>信息基准</dt><dd>2026-11；票价、开放、演出与班次以官方公告为准。</dd></div>
+          </dl>
+        </aside>
+      </div>
+      <div class="mini-grid">
+        <article class="mini-card reveal">
+          <h3>看什么</h3>
+          <p>秦的军阵、唐的塔寺、明的城墙。历史线索清楚，三天就能串起一条从秦到唐的阅读路径。</p>
+        </article>
+        <article class="mini-card reveal">
+          <h3>吃什么</h3>
+          <p>肉夹馍、羊肉泡馍、biangbiang 面是入门三件套；回民街适合感受氛围，大皮院、洒金桥更适合慢慢找店。</p>
+        </article>
+        <article class="mini-card reveal">
+          <h3>怎么走</h3>
+          <p>市内地铁优先，老城短距离步行或共享单车；临潼东线单独安排一天，不要把兵马俑和曲江夜景硬塞进半天。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 贰 · 必去景点 ========== -->
+  <section id="sights" class="section section--tint" aria-labelledby="sights-title">
+    <div class="container">
+      <header class="section-head reveal">
+        <p class="section-index">贰 · SIGHTS</p>
+        <h2 id="sights-title">必去景点</h2>
+        <p class="section-lead">以下 9 个点覆盖第一次来西安最常走的三条线：临潼东线、老城中轴与曲江人文。门票、开放时间与预约规则为动态信息，参考，以景区公告为准。</p>
+      </header>
+      <div class="sights-grid">
+        <article class="sight-card reveal">
+          <div class="card-top"><span class="num">01</span><span class="tag">世界文化遗产</span></div>
+          <h3>秦始皇兵马俑</h3>
+          <p class="card-tagline">秦帝国的地下军阵</p>
+          <p>位于临潼区，是秦始皇陵的陪葬坑，由秦始皇帝陵博物院管理，也是世界文化遗产“秦始皇陵及兵马俑坑”的核心。一号坑规模最大，陶俑排列成军阵，是理解秦代军事与工艺最直观的一课。</p>
+          <dl class="card-facts">
+            <div><dt>怎么去</dt><dd>西安站东广场乘游 5/306 路；或地铁 9 号线至华清池站后换乘公交/打车。车程受路况影响，市区往返约 1–1.5 小时/程。</dd></div>
+            <div><dt>怎么玩</dt><dd>预留 3–4 小时，尽量早到；先看一号坑，再按现场指引看三号坑、二号坑与铜车马展。</dd></div>
+            <div><dt>预约提醒</dt><dd>实行实名预约，走官方渠道；只认“秦始皇帝陵博物院”，不要被名称相近的人造景区误导。</dd></div>
+          </dl>
+          <p class="card-meta">门票、开放时间与预约规则：参考，以景区公告为准。</p>
+        </article>
+
+        <article class="sight-card reveal">
+          <div class="card-top"><span class="num">02</span><span class="tag">唐 · 城市地标</span></div>
+          <h3>大雁塔（大慈恩寺）</h3>
+          <p class="card-tagline">唐长安的天际线</p>
+          <p>位于大慈恩寺内，唐代玄奘主持修建，现存七层，是西安标志性古塔。塔身与寺院构成曲江一带最重要的唐文化坐标，北广场也是市民与游客夜间聚集的地方。</p>
+          <dl class="card-facts">
+            <div><dt>怎么去</dt><dd>地铁 3/4 号线大雁塔站，步行至大慈恩寺；也可乘公交至大雁塔北广场。</dd></div>
+            <div><dt>怎么玩</dt><dd>先逛大慈恩寺，再视体力登塔；塔内空间狭窄，带老人小孩量力而行。北广场音乐喷泉以现场公告为准。</dd></div>
+            <div><dt>预约提醒</dt><dd>入寺与登塔可能分别收费；费用、开放时间与预约方式以景区公告为准。</dd></div>
+          </dl>
+          <p class="card-meta">门票、开放时间与预约规则：参考，以景区公告为准。</p>
+        </article>
+
+        <article class="sight-card reveal">
+          <div class="card-top"><span class="num">03</span><span class="tag">明 · 骑行</span></div>
+          <h3>西安城墙</h3>
+          <p class="card-tagline">在明城垣上环望老城</p>
+          <p>明代城垣，中国现存规模最大、保存最完整的古代城垣之一，周长约 13.74 公里。永宁门（南门）是最常用的登城点，城墙上看老城、护城河与城市轴线，视野开阔。</p>
+          <dl class="card-facts">
+            <div><dt>怎么去</dt><dd>地铁 2 号线永宁门站，步行至南门登城口；也可从含光门、文昌门等城门登城。</dd></div>
+            <div><dt>怎么玩</dt><dd>步行选一段即可；体力允许可租自行车环城，一圈约 13.74 公里。傍晚登城可看日落与亮灯。</dd></div>
+            <div><dt>预约提醒</dt><dd>登城、骑行与押金规则以景区公告为准；注意归还时间，夏季做好防晒。</dd></div>
+          </dl>
+          <p class="card-meta">门票、开放时间与预约规则：参考，以景区公告为准。</p>
+        </article>
+
+        <article class="sight-card reveal">
+          <div class="card-top"><span class="num">04</span><span class="tag tag--gold">明 · 夜景</span></div>
+          <h3>钟楼 · 鼓楼</h3>
+          <p class="card-tagline">老城中心的晨钟暮鼓</p>
+          <p>明代建筑，位于西安市中心，钟楼与鼓楼相对，是东西南北四条大街交会的城市地标。夜景与广场氛围突出，登楼可看老城轴线；广场本身适合散步和拍照。</p>
+          <dl class="card-facts">
+            <div><dt>怎么去</dt><dd>地铁 2 号线钟楼站；鼓楼在钟楼西北侧，步行可达。</dd></div>
+            <div><dt>怎么玩</dt><dd>广场免费，登楼收费；建议傍晚到，先看广场与街景，再按体力选择登楼。人流高峰看好随身物品。</dd></div>
+            <div><dt>预约提醒</dt><dd>登楼票价、开放时间与预约方式以景区公告为准。</dd></div>
+          </dl>
+          <p class="card-meta">门票、开放时间与预约规则：参考，以景区公告为准。</p>
+        </article>
+
+        <article class="sight-card reveal">
+          <div class="card-top"><span class="num">05</span><span class="tag">唐 · 骊山</span></div>
+          <h3>华清宫</h3>
+          <p class="card-tagline">骊山脚下的唐宫温泉</p>
+          <p>位于临潼区骊山北麓，唐代皇家温泉宫苑，也是西安事变发生地之一，五间厅等遗迹保留在景区内。园林、温泉遗址与骊山山景是主要看点，适合与兵马俑同日安排。</p>
+          <dl class="card-facts">
+            <div><dt>怎么去</dt><dd>与兵马俑同在临潼东线，常见做法是上午兵马俑、下午华清宫；地铁 9 号线至华清池站后步行或换乘。</dd></div>
+            <div><dt>怎么玩</dt><dd>预留 2–3 小时，按体力选择是否上骊山；《长恨歌》等演出有季节与场次变化，先查官方公告再安排。</dd></div>
+            <div><dt>预约提醒</dt><dd>开放区域、演出与票价以景区公告为准；与兵马俑同日时留足交通和排队时间。</dd></div>
+          </dl>
+          <p class="card-meta">门票、开放时间与预约规则：参考，以景区公告为准。</p>
+        </article>
+
+        <article class="sight-card reveal">
+          <div class="card-top"><span class="num">06</span><span class="tag tag--jade">夜景 · 步行街</span></div>
+          <h3>大唐不夜城</h3>
+          <p class="card-tagline">灯火里的唐风步行街</p>
+          <p>位于大雁塔南侧，是免费开放的步行街区，以夜间灯光、唐风街景和街头演出闻名。适合傍晚以后慢慢逛，与大唐芙蓉园、曲江池可串成曲江夜游。</p>
+          <dl class="card-facts">
+            <div><dt>怎么去</dt><dd>地铁 3/4 号线大雁塔站，向南步行；也可乘公交至大唐不夜城周边。</dd></div>
+            <div><dt>怎么玩</dt><dd>天黑后再来，先看大雁塔夜景，再沿步行街往南逛；演出与客流管控动态变化，以现场公告为准。</dd></div>
+            <div><dt>预约提醒</dt><dd>免费开放，但演出、客流管控与临时封闭以官方公告为准；节假日提前约定集合点。</dd></div>
+          </dl>
+          <p class="card-meta">门票、开放时间与预约规则：参考，以景区公告为准。</p>
+        </article>
+
+        <article class="sight-card reveal">
+          <div class="card-top"><span class="num">07</span><span class="tag">博物馆 · 周秦汉唐</span></div>
+          <h3>陕西历史博物馆</h3>
+          <p class="card-tagline">一馆看周秦汉唐</p>
+          <p>位于西安市区，馆藏以周秦汉唐文物见长，是理解陕西历史的高效入口。常设展与专题展内容丰富，建议预留半天；比走马观花更值得的是挑几件重点文物慢慢看。</p>
+          <dl class="card-facts">
+            <div><dt>怎么去</dt><dd>地铁 2/3 号线小寨站或 4 号线大雁塔站，步行或换乘至馆区；具体入口按预约信息。</dd></div>
+            <div><dt>怎么玩</dt><dd>先看常设展主线，再按兴趣看专题展；馆内步行与站立时间长，穿舒适的鞋，带水。</dd></div>
+            <div><dt>预约提醒</dt><dd>通常需提前实名预约；周一闭馆情况、票价与预约规则以官方公告为准。</dd></div>
+          </dl>
+          <p class="card-meta">门票、开放时间与预约规则：参考，以景区公告为准。</p>
+        </article>
+
+        <article class="sight-card reveal">
+          <div class="card-top"><span class="num">08</span><span class="tag tag--jade">碑刻 · 老街</span></div>
+          <h3>碑林博物馆 · 书院门</h3>
+          <p class="card-tagline">碑刻与老街的半日</p>
+          <p>碑林博物馆位于西安城墙文昌门内三学街一带，收藏大量历代碑刻，是书法与石刻爱好者的重点。相邻的书院门是笔墨纸砚与文创老街，适合慢逛，不必赶时间。</p>
+          <dl class="card-facts">
+            <div><dt>怎么去</dt><dd>地铁 2 号线永宁门站，步行至文昌门内；与城墙南门段可同日安排。</dd></div>
+            <div><dt>怎么玩</dt><dd>碑林预留 2 小时左右，重点看名碑与石刻；书院门适合随意逛店，买笔墨纸砚量力消费。</dd></div>
+            <div><dt>预约提醒</dt><dd>开放时间、票价与预约方式以景区公告为准；与城墙同日时注意体力分配。</dd></div>
+          </dl>
+          <p class="card-meta">门票、开放时间与预约规则：参考，以景区公告为准。</p>
+        </article>
+
+        <article class="sight-card reveal">
+          <div class="card-top"><span class="num">09</span><span class="tag">唐塔 · 清静</span></div>
+          <h3>小雁塔 · 西安博物院</h3>
+          <p class="card-tagline">清静唐塔与城市博物馆</p>
+          <p>小雁塔位于荐福寺内，是唐代密檐式砖塔；西安博物院与小雁塔同院，常设展适合补充城市历史。相比热门馆，这里通常更清静，适合与陕历博二选一或按时间串联。</p>
+          <dl class="card-facts">
+            <div><dt>怎么去</dt><dd>地铁 2 号线南稍门站，步行至荐福寺/西安博物院；与陕历博可二选一或按时间串联。</dd></div>
+            <div><dt>怎么玩</dt><dd>先看小雁塔与荐福寺环境，再逛西安博物院；适合半日慢走，带老人小孩也相对轻松。</dd></div>
+            <div><dt>预约提醒</dt><dd>预约、开放时间与票价以官方公告为准；出行前确认当日是否闭馆或限流。</dd></div>
+          </dl>
+          <p class="card-meta">门票、开放时间与预约规则：参考，以景区公告为准。</p>
+        </article>
+      </div>
+      <p class="note"><strong>信息边界：</strong>景点所属朝代、位置与相对方位为稳定事实；票价、开放时间、演出、预约与临时闭馆等均为动态信息，出行前请以景区及官方渠道最新公告为准。</p>
+    </div>
+  </section>
+
+  <!-- ========== 叁 · 经典路线 ========== -->
+  <section id="routes" class="section" aria-labelledby="routes-title">
+    <div class="container">
+      <header class="section-head reveal">
+        <p class="section-index">叁 · ROUTES</p>
+        <h2 id="routes-title">经典路线</h2>
+        <p class="section-lead">三套路线都按“同一条线放同一天”的思路排，减少折返。顺序可按预约时段调整；开放、演出与预约规则以官方公告为准。</p>
+      </header>
+      <div class="route-list">
+
+        <article class="route-card reveal">
+          <div class="route-head">
+            <div class="route-title-wrap">
+              <span class="route-badge">1 日 · 东线精华</span>
+              <h3>兵马俑 + 华清宫，晚上回老城</h3>
+            </div>
+            <p class="route-fit"><strong>适合：</strong>时间紧、体力较好、以秦唐东线为主的人。<br><strong>体力强度：</strong>高（全天跨城 + 大量步行）。</p>
+          </div>
+          <ol class="timeline">
+            <li>
+              <span class="time">上午</span>
+              <h4>秦始皇兵马俑</h4>
+              <p>建议 3–4 小时，尽量早出发。先看一号坑，再按现场指引看三号坑、二号坑与铜车马展。</p>
+              <p class="transit">交通：西安站东广场乘游 5/306 路，或地铁 9 号线至华清池站换乘；车程受路况影响。</p>
+            </li>
+            <li>
+              <span class="time">下午</span>
+              <h4>华清宫</h4>
+              <p>约 2–3 小时，看唐宫遗址与五间厅；体力一般可不强求上骊山，把时间留给返程。</p>
+              <p class="transit">交通：兵马俑至华清宫打车或公交衔接，预留排队与等车时间。</p>
+            </li>
+            <li>
+              <span class="time">晚上</span>
+              <h4>回市区 · 钟鼓楼 / 回民街</h4>
+              <p>钟鼓楼广场看夜景，回民街用餐；若体力允许，可改去大唐不夜城看灯光与街头演出。</p>
+              <p class="transit">交通：地铁 9 号线转市区线，或网约车；避开晚高峰。</p>
+            </li>
+          </ol>
+          <div class="route-foot">
+            <p><strong>预约重点：</strong>兵马俑实名预约；华清宫演出与开放区域先查公告。不建议再叠加城墙或陕历博，一天塞太满反而两头都看不透。</p>
+            <p class="card-meta">顺序可按预约时段调整；开放、演出与预约规则以官方公告为准。</p>
+          </div>
+        </article>
+
+        <article class="route-card reveal">
+          <div class="route-head">
+            <div class="route-title-wrap">
+              <span class="route-badge">2 日 · 东线 + 老城曲江</span>
+              <h3>一天临潼，一天城墙与曲江</h3>
+            </div>
+            <p class="route-fit"><strong>适合：</strong>第一次来、想兼顾秦唐与夜景的人。<br><strong>体力强度：</strong>中高（Day 2 步行多）。</p>
+          </div>
+          <div class="route-day">
+            <h4>Day 1 · 临潼东线</h4>
+            <ol class="timeline">
+              <li>
+                <span class="time">上午</span>
+                <h5>兵马俑</h5>
+                <p>3–4 小时，尽早出发；一号坑、三号坑、二号坑与铜车马展按现场指引看。</p>
+                <p class="transit">交通：西安站东广场游 5/306 路，或地铁 9 号线至华清池站换乘。</p>
+              </li>
+              <li>
+                <span class="time">下午</span>
+                <h5>华清宫</h5>
+                <p>2–3 小时，看唐宫遗址、五间厅与骊山山景；演出与开放区域以公告为准。</p>
+                <p class="transit">交通：兵马俑至华清宫打车/公交，返程预留等车时间。</p>
+              </li>
+              <li>
+                <span class="time">晚上</span>
+                <h5>回民街 / 钟鼓楼</h5>
+                <p>回市区吃晚饭，逛钟鼓楼广场；不建议再安排需要预约的博物馆。</p>
+                <p class="transit">交通：地铁 9 号线转市区线，或网约车。</p>
+              </li>
+            </ol>
+          </div>
+          <div class="route-day">
+            <h4>Day 2 · 老城 + 曲江</h4>
+            <ol class="timeline">
+              <li>
+                <span class="time">上午</span>
+                <h5>西安城墙 · 钟鼓楼</h5>
+                <p>从永宁门登城，步行或骑行一段；下城后步行/地铁到钟鼓楼广场。</p>
+                <p class="transit">交通：地铁 2 号线永宁门站进，钟楼站出；城墙骑行注意归还时间。</p>
+              </li>
+              <li>
+                <span class="time">下午</span>
+                <h5>回民街午餐 → 大雁塔</h5>
+                <p>回民街吃午饭，地铁到大雁塔，逛大慈恩寺与北广场；登塔视体力。</p>
+                <p class="transit">交通：钟楼站乘地铁 2 号线转 3/4 号线至大雁塔站。</p>
+              </li>
+              <li>
+                <span class="time">晚上</span>
+                <h5>大唐不夜城</h5>
+                <p>天黑后从大雁塔南侧进入步行街，看灯光与街头演出；提前约定集合点。</p>
+                <p class="transit">交通：步行可达；返程优先地铁，节假日打车排队较长。</p>
+              </li>
+            </ol>
+          </div>
+          <div class="route-foot">
+            <p><strong>预约重点：</strong>兵马俑提前约；城墙骑行押金与归还时间以现场为准；大唐不夜城演出与管控看当天公告。</p>
+            <p class="card-meta">顺序可按预约时段调整；开放、演出与预约规则以官方公告为准。</p>
+          </div>
+        </article>
+
+        <article class="route-card reveal">
+          <div class="route-head">
+            <div class="route-title-wrap">
+              <span class="route-badge">3 日 · 东线 + 中轴 + 博物馆</span>
+              <h3>三天把秦、唐、明各看一遍</h3>
+            </div>
+            <p class="route-fit"><strong>适合：</strong>第一次来、时间相对充裕、想进博物馆的人。<br><strong>体力强度：</strong>中高；Day 3 可换成华山。</p>
+          </div>
+          <div class="route-day">
+            <h4>Day 1 · 临潼东线</h4>
+            <ol class="timeline">
+              <li>
+                <span class="time">上午</span>
+                <h5>兵马俑</h5>
+                <p>3–4 小时，尽量早到；重点看一号坑与铜车马展。</p>
+                <p class="transit">交通：游 5/306 路或地铁 9 号线换乘。</p>
+              </li>
+              <li>
+                <span class="time">下午</span>
+                <h5>华清宫</h5>
+                <p>2–3 小时，唐宫遗址与五间厅；按体力决定是否上骊山。</p>
+                <p class="transit">交通：兵马俑至华清宫打车/公交，返程避开晚高峰。</p>
+              </li>
+              <li>
+                <span class="time">晚上</span>
+                <h5>回民街夜宵</h5>
+                <p>回市区后去回民街或大皮院一带吃夜宵，少量多样，别一次点太多。</p>
+                <p class="transit">交通：地铁转 2 号线钟楼站，或网约车。</p>
+              </li>
+            </ol>
+          </div>
+          <div class="route-day">
+            <h4>Day 2 · 老城 + 曲江</h4>
+            <ol class="timeline">
+              <li>
+                <span class="time">上午</span>
+                <h5>城墙 → 钟鼓楼</h5>
+                <p>永宁门登城，步行或骑行一段；下城后去钟鼓楼广场。</p>
+                <p class="transit">交通：地铁 2 号线永宁门站进、钟楼站出。</p>
+              </li>
+              <li>
+                <span class="time">下午</span>
+                <h5>回民街午餐 → 大雁塔</h5>
+                <p>回民街吃午饭，逛大慈恩寺与北广场；登塔量力。</p>
+                <p class="transit">交通：地铁 2 号线转 3/4 号线至大雁塔站。</p>
+              </li>
+              <li>
+                <span class="time">晚上</span>
+                <h5>大唐不夜城</h5>
+                <p>看夜景与街头演出，沿步行街往南逛；节假日看好老人小孩。</p>
+                <p class="transit">交通：大雁塔步行可达，返程优先地铁。</p>
+              </li>
+            </ol>
+          </div>
+          <div class="route-day">
+            <h4>Day 3 · 博物馆与人文</h4>
+            <ol class="timeline">
+              <li>
+                <span class="time">上午</span>
+                <h5>陕西历史博物馆</h5>
+                <p>预留 3 小时左右，先看常设展主线，再按兴趣看专题展；通常需提前预约。</p>
+                <p class="transit">交通：地铁 2/3 号线小寨站或 4 号线大雁塔站，步行/换乘。</p>
+              </li>
+              <li>
+                <span class="time">下午</span>
+                <h5>小雁塔 / 西安博物院 或 碑林 + 书院门</h5>
+                <p>二选一：想清静去小雁塔与西安博物院；想看碑刻与老街去碑林、书院门。</p>
+                <p class="transit">交通：小雁塔乘地铁 2 号线至南稍门；碑林从永宁门步行至文昌门内。</p>
+              </li>
+              <li>
+                <span class="time">晚上</span>
+                <h5>永兴坊 / 市区收尾</h5>
+                <p>永兴坊或市区商圈吃晚饭，买点伴手礼；第二天返程的提前整理行李。</p>
+                <p class="transit">交通：地铁或网约车回酒店；夜间记下车牌。</p>
+              </li>
+            </ol>
+          </div>
+          <div class="route-foot">
+            <p><strong>备选：</strong>把 Day 3 换成华山一日游（华阴市，五岳之一），需早出晚归，查看天气与索道公告，不建议带老人小孩硬爬。<br><strong>预约重点：</strong>陕历博通常需提前预约；预约失败时用西安博物院、碑林博物馆等等量替代，不要空等。</p>
+            <p class="card-meta">顺序可按预约时段调整；开放、演出与预约规则以官方公告为准。</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 肆 · 美食推荐 ========== -->
+  <section id="food" class="section section--tint" aria-labelledby="food-title">
+    <div class="container">
+      <header class="section-head reveal">
+        <p class="section-index">肆 · FOOD</p>
+        <h2 id="food-title">美食推荐</h2>
+        <p class="section-lead">西安的碳水密度很高，第一次来不必追求“吃全”，抓住回民街与几样代表小吃，再按口味慢慢加。价格与营业时间以商家实际为准。</p>
+      </header>
+
+      <div class="food-feature reveal">
+        <div>
+          <span class="tag tag--gold">街区 · 清真饮食</span>
+          <h3>回民街：先逛北院门，再往巷子里走</h3>
+          <p>回民街通常指北院门及周边街巷，是西安最有名的清真饮食街区。主街游客密集、价格有差异，适合第一次来感受氛围；想避开最挤的路段，可以往大皮院、洒金桥方向走，小店更分散，也更容易慢慢挑。</p>
+          <p>尊重清真饮食习俗，不在清真餐馆外带非清真食品；点单前看清标价，几个人分食更容易多尝几样。</p>
+        </div>
+        <ul class="food-tips">
+          <li>先逛一圈再决定吃什么，少量多样。</li>
+          <li>看明码标价再点，避免事后结算尴尬。</li>
+          <li>高峰时段拼桌、排队常见，留出时间。</li>
+          <li>不吃辣提前说；清真街区尊重习俗。</li>
+        </ul>
+      </div>
+
+      <div class="card-grid food-grid">
+        <article class="food-card reveal">
+          <div class="card-top"><span class="num">01</span><span class="tag">必尝</span></div>
+          <h3>肉夹馍</h3>
+          <p class="card-tagline">腊汁肉夹白吉馍</p>
+          <dl class="food-facts">
+            <div><dt>是什么</dt><dd>西安最常见的碳水快乐；回民街有清真牛肉版本。</dd></div>
+            <div><dt>怎么吃</dt><dd>现打白吉馍夹肥瘦腊汁肉，肥瘦/纯瘦可选；配冰峰或酸梅汤。</dd></div>
+            <div><dt>口味</dt><dd>咸香、油润，辣度通常可调；适合第一次来、想快速解决一餐的人。</dd></div>
+            <div><dt>注意</dt><dd>现打馍口感更好；热门店排队，按需选择。</dd></div>
+          </dl>
+        </article>
+
+        <article class="food-card reveal">
+          <div class="card-top"><span class="num">02</span><span class="tag tag--jade">清真</span></div>
+          <h3>羊肉泡馍</h3>
+          <p class="card-tagline">自己掰馍的慢功夫</p>
+          <dl class="food-facts">
+            <div><dt>是什么</dt><dd>牛羊肉汤泡掰馍，饱腹感强，是西安代表性的清真主食。</dd></div>
+            <div><dt>怎么吃</dt><dd>自己把馍掰成小块，交给师傅浇汤；配糖蒜、辣酱。</dd></div>
+            <div><dt>口味</dt><dd>汤浓、肉香，胡椒与辣酱可调；适合想坐下来慢慢吃的人。</dd></div>
+            <div><dt>注意</dt><dd>掰馍需要耐心；清真饮食，尊重习俗。</dd></div>
+          </dl>
+        </article>
+
+        <article class="food-card reveal">
+          <div class="card-top"><span class="num">03</span><span class="tag tag--gold">面食</span></div>
+          <h3>biangbiang 面</h3>
+          <p class="card-tagline">宽面、油泼辣子与蒜香</p>
+          <dl class="food-facts">
+            <div><dt>是什么</dt><dd>陕西宽面代表，常见“三合一”做法，面体筋道。</dd></div>
+            <div><dt>怎么吃</dt><dd>宽面拌油泼辣子、臊子与蒜，拌匀吃；可要求少辣。</dd></div>
+            <div><dt>口味</dt><dd>香辣、蒜香重；适合喜欢面食和重口的人。</dd></div>
+            <div><dt>注意</dt><dd>“biang”为民间造字，不必强求写法；辣度提前说。</dd></div>
+          </dl>
+        </article>
+
+        <article class="food-card reveal">
+          <div class="card-top"><span class="num">04</span><span class="tag">清爽</span></div>
+          <h3>凉皮</h3>
+          <p class="card-tagline">酸辣开胃的夏日选择</p>
+          <dl class="food-facts">
+            <div><dt>是什么</dt><dd>米皮、面皮或擀面皮，是西安街头最常见的凉食之一。</dd></div>
+            <div><dt>怎么吃</dt><dd>切条后浇辣油、醋、蒜水与配菜，拌匀；常与肉夹馍同点。</dd></div>
+            <div><dt>口味</dt><dd>酸辣、清爽；适合天气热、想吃轻一点的人。</dd></div>
+            <div><dt>注意</dt><dd>辣度可调；部分含蒜，对蒜敏感提前说明。</dd></div>
+          </dl>
+        </article>
+
+        <article class="food-card reveal">
+          <div class="card-top"><span class="num">05</span><span class="tag">甜口</span></div>
+          <h3>甑糕</h3>
+          <p class="card-tagline">糯米与红枣的早餐</p>
+          <dl class="food-facts">
+            <div><dt>是什么</dt><dd>糯米加红枣、芸豆蒸制，甜口，是本地常见早餐之一。</dd></div>
+            <div><dt>怎么吃</dt><dd>趁热用勺子挖着吃，枣香浓；分量通常较扎实。</dd></div>
+            <div><dt>口味</dt><dd>甜、糯；适合喜欢甜口、想尝本地早餐的人。</dd></div>
+            <div><dt>注意</dt><dd>分量足，多人分食更合适；血糖敏感者少量。</dd></div>
+          </dl>
+        </article>
+
+        <article class="food-card reveal">
+          <div class="card-top"><span class="num">06</span><span class="tag tag--jade">清真</span></div>
+          <h3>胡辣汤</h3>
+          <p class="card-tagline">胡椒香的热乎早餐</p>
+          <dl class="food-facts">
+            <div><dt>是什么</dt><dd>西安回民版肉丸或牛肉胡辣汤，汤体浓稠，胡椒味突出。</dd></div>
+            <div><dt>怎么吃</dt><dd>配馍、水煎包或油条；按口味加辣油。</dd></div>
+            <div><dt>口味</dt><dd>胡椒香、微辣；适合早餐想吃热乎的人。</dd></div>
+            <div><dt>注意</dt><dd>胡椒刺激，肠胃敏感少量尝试；清真饮食。</dd></div>
+          </dl>
+        </article>
+
+        <article class="food-card reveal">
+          <div class="card-top"><span class="num">07</span><span class="tag tag--jade">清真</span></div>
+          <h3>水盆羊肉</h3>
+          <p class="card-tagline">清汤羊肉配月牙饼</p>
+          <dl class="food-facts">
+            <div><dt>是什么</dt><dd>清汤羊肉配月牙饼，澄城、蒲城风味在西安也常见。</dd></div>
+            <div><dt>怎么吃</dt><dd>羊肉蘸料或夹饼，汤单独喝；配糖蒜解腻。</dd></div>
+            <div><dt>口味</dt><dd>汤清、肉香，膻味因店而异；适合喜欢羊肉、想喝汤的人。</dd></div>
+            <div><dt>注意</dt><dd>不吃膻味先少量尝试；清真饮食。</dd></div>
+          </dl>
+        </article>
+
+        <article class="food-card reveal">
+          <div class="card-top"><span class="num">08</span><span class="tag">硬菜</span></div>
+          <h3>葫芦鸡</h3>
+          <p class="card-tagline">西安传统名菜</p>
+          <dl class="food-facts">
+            <div><dt>是什么</dt><dd>西安传统名菜，先煮后蒸再炸，皮酥肉烂，适合多人分食。</dd></div>
+            <div><dt>怎么吃</dt><dd>整鸡上桌，蘸椒盐；配清爽蔬菜或汤解腻。</dd></div>
+            <div><dt>口味</dt><dd>咸香、外酥里嫩，通常不辣；适合多人聚餐点一道硬菜。</dd></div>
+            <div><dt>注意</dt><dd>分量大，两三人以上再点；价格以商家实际为准。</dd></div>
+          </dl>
+        </article>
+      </div>
+      <p class="note"><strong>价格提示：</strong>本站不写精确单价，价格与营业时间以商家实际为准；回民街为清真街区，请尊重饮食与习俗。高峰时段排队、拼桌较常见，留出时间。</p>
+    </div>
+  </section>
+
+  <!-- ========== 伍 · 交通与住宿 ========== -->
+  <section id="transport" class="section" aria-labelledby="transport-title">
+    <div class="container">
+      <header class="section-head reveal">
+        <p class="section-index">伍 · TRANSPORT &amp; STAY</p>
+        <h2 id="transport-title">交通与住宿</h2>
+        <p class="section-lead">西安的公共交通对游客友好，地铁能覆盖大多数核心点；临潼东线需要单独规划。住宿优先选地铁站附近，比追求“离某个景点最近”更实用。</p>
+      </header>
+
+      <div class="transport-grid">
+        <article class="transport-card reveal">
+          <h3>到达：机场与火车站</h3>
+          <ul class="check-list">
+            <li><strong>机场：</strong>西安咸阳国际机场；地铁 14 号线机场段、机场大巴、出租车/网约车均可进城。班次、末班时间以官方公告为准。</li>
+            <li><strong>高铁：</strong>西安北站是主要高铁站；西安站靠近市中心；西安南站离市区较远，购票时注意区分。</li>
+            <li><strong>提醒：</strong>车站主动揽客的“低价包车”“一日游”不要轻信，优先地铁、正规平台网约车或出租车。</li>
+          </ul>
+        </article>
+
+        <article class="transport-card reveal">
+          <h3>市内：地铁优先</h3>
+          <ul class="check-list">
+            <li>地铁 + 公交 + 网约车组合；地铁覆盖钟楼、大雁塔、北客站、永宁门等主要节点，扫码乘车。</li>
+            <li>老城区部分路段拥堵，赶时间优先地铁；短距离可用共享单车，注意停放区域。</li>
+            <li>夜间打车用正规平台，记下车牌；不坐无标识黑车，不接受一口价。</li>
+          </ul>
+        </article>
+
+        <article class="transport-card reveal">
+          <h3>去兵马俑：东线交通</h3>
+          <ul class="check-list">
+            <li>西安站东广场乘游 5/306 路，是常见的直达方式之一。</li>
+            <li>或地铁 9 号线至华清池站后转公交/打车，适合与华清宫同日安排。</li>
+            <li>线路、票价、首末班以官方公告为准；建议早出发，给排队和安检留时间。</li>
+            <li>只认“秦始皇帝陵博物院”官方售票与预约渠道，不买黄牛票。</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="subhead reveal">
+        <h3>住哪里：4 类住宿区域对比</h3>
+        <p>按预算选择连锁或民宿，优先地铁站 500 米内；不写具体品牌与价格承诺。</p>
+      </div>
+      <div class="lodging-grid">
+        <article class="lodging-card reveal">
+          <h4>钟楼 / 回民街</h4>
+          <dl>
+            <div><dt>优点</dt><dd>市中心，吃逛方便，地铁换乘便利，去钟鼓楼和回民街可步行。</dd></div>
+            <div><dt>注意</dt><dd>临街房可能吵，夜间人流大；订房时留意房间朝向与楼层。</dd></div>
+            <div><dt>适合</dt><dd>第一次来、想住在老城中心、以吃逛为主的人。</dd></div>
+          </dl>
+        </article>
+        <article class="lodging-card reveal">
+          <h4>大雁塔 / 曲江</h4>
+          <dl>
+            <div><dt>优点</dt><dd>夜景好，亲子/度假氛围强，靠近大唐不夜城与大雁塔。</dd></div>
+            <div><dt>注意</dt><dd>节假日房价上浮，部分区域步行距离长；看清离地铁站的实际距离。</dd></div>
+            <div><dt>适合</dt><dd>想看夜景、带孩子、以曲江为主要活动区域的人。</dd></div>
+          </dl>
+        </article>
+        <article class="lodging-card reveal">
+          <h4>西安北站</h4>
+          <dl>
+            <div><dt>优点</dt><dd>高铁进出方便，适合中转；酒店选择相对集中。</dd></div>
+            <div><dt>注意</dt><dd>离老城景点较远，夜生活少；进城通勤要预留时间。</dd></div>
+            <div><dt>适合</dt><dd>早班高铁、晚到中转、把西安作为中转站的人。</dd></div>
+          </dl>
+        </article>
+        <article class="lodging-card reveal">
+          <h4>永宁门 / 南门里</h4>
+          <dl>
+            <div><dt>优点</dt><dd>城墙景观好，精品民宿集中，去钟楼和回民街都方便。</dd></div>
+            <div><dt>注意</dt><dd>热门房型紧俏，需早订；城墙边夜间可能有活动噪音。</dd></div>
+            <div><dt>适合</dt><dd>想住城墙边、喜欢慢逛老城、重视住宿氛围的人。</dd></div>
+          </dl>
+        </article>
+      </div>
+      <p class="note"><strong>交通提示：</strong>机场大巴、地铁、公交的班次、票价与首末班为动态信息，参考，以官方公告为准；临潼返程尽量避开晚高峰，给等车留余量。</p>
+    </div>
+  </section>
+
+  <!-- ========== 陆 · 最佳季节与避坑 ========== -->
+  <section id="tips" class="section section--tint" aria-labelledby="tips-title">
+    <div class="container">
+      <header class="section-head reveal">
+        <p class="section-index">陆 · SEASONS &amp; TIPS</p>
+        <h2 id="tips-title">最佳季节与避坑</h2>
+        <p class="section-lead">西安四季分明，春秋最舒服，夏冬各有取舍；人流高峰集中在五一、国庆和春节。把预约、交通和防骗三件事提前做好，行程会顺很多。</p>
+      </header>
+
+      <div class="subhead reveal">
+        <h3>四季怎么选</h3>
+        <p>春秋优先，夏冬按体力与室内外偏好取舍。</p>
+      </div>
+      <div class="season-grid">
+        <article class="season-card reveal">
+          <h4>春 <span>3–5 月</span></h4>
+          <p>气温相对舒适，适合步行与城墙骑行；可能有沙尘或花粉，敏感人群备口罩。早晚温差大，采用分层穿衣。</p>
+        </article>
+        <article class="season-card reveal">
+          <h4>夏 <span>6–8 月</span></h4>
+          <p>炎热、暴雨与暴晒并存；兵马俑、城墙尽量安排在上午或傍晚，备防晒、补水与雨具，正午少在户外硬撑。</p>
+        </article>
+        <article class="season-card reveal">
+          <h4>秋 <span>9–11 月</span></h4>
+          <p>最佳季节之一，天高气爽，适合城墙骑行与曲江夜游；国庆前后人流大，热门景点提前预约。</p>
+        </article>
+        <article class="season-card reveal">
+          <h4>冬 <span>12–2 月</span></h4>
+          <p>干冷、游客相对少；城墙风大，注意保暖。室内博物馆是更稳妥的选择，春节前后仍要预期人流上升。</p>
+        </article>
+      </div>
+      <p class="note"><strong>人流提示：</strong>五一、国庆、春节为高峰；尽量错峰，热门景点提前预约。春季可能有沙尘/花粉，敏感人群备口罩；夏季暴雨时减少山区与户外安排。</p>
+
+      <div class="subhead reveal">
+        <h3>10 条实用避坑</h3>
+        <p>按“预约、交通、消费、安全”四类整理，出发前扫一眼。</p>
+      </div>
+      <ol class="pitfalls">
+        <li><strong>只走官方预约渠道</strong><span>兵马俑、陕历博等实行实名预约，走官方公众号/官网，不买黄牛票，不信“内部票”。</span></li>
+        <li><strong>拒绝低价一日游</strong><span>“低价一日游”“免费接送”和车站拉客常带购物点或山寨景点，宁可自己坐地铁/正规网约车。</span></li>
+        <li><strong>认准秦始皇帝陵博物院</strong><span>不要被名称相近的人造景区误导；导航和购票都核对官方名称。</span></li>
+        <li><strong>尊重回民街清真习俗</strong><span>回民街是清真街区，不在清真餐馆外带非清真食品；拍摄人物先征得同意。</span></li>
+        <li><strong>不夜城先约定集合点</strong><span>节假日人流极大，提前约定集合点，看好老人小孩；临时管控听从现场指引。</span></li>
+        <li><strong>城墙骑行量力而行</strong><span>注意防晒、刹车与归还时间；押金规则以现场为准，别为赶时间超速。</span></li>
+        <li><strong>华山看天气与索道公告</strong><span>华山天气多变，索道可能停运；穿防滑鞋，不冒险走未开放路段，带老人小孩慎重。</span></li>
+        <li><strong>野导讲解要谨慎</strong><span>景区周边“野导”讲解质量参差，优先官方讲解或正规平台，先谈清服务与费用。</span></li>
+        <li><strong>打车用正规平台</strong><span>拒绝一口价黑车；夜间记下车牌，把行程分享给同行人。</span></li>
+        <li><strong>保留票据再投诉</strong><span>遇消费纠纷保留票据与支付记录，拨打 12315；紧急情况 110/120/119，政务热线 12345。</span></li>
+      </ol>
+
+      <div class="emergency reveal">
+        <h3>应急电话与求助</h3>
+        <p>遇到紧急情况先保证人身安全，再联系警方、景区工作人员或酒店前台。以下号码为常用公共服务号码，具体服务范围以官方说明为准。</p>
+        <ul>
+          <li><strong>110</strong> 报警</li>
+          <li><strong>120</strong> 急救</li>
+          <li><strong>119</strong> 火警</li>
+          <li><strong>12345</strong> 政务热线</li>
+          <li><strong>12315</strong> 消费投诉</li>
+        </ul>
+      </div>
+
+      <div class="checklist reveal">
+        <h3>行前清单</h3>
+        <ul>
+          <li>身份证</li>
+          <li>预约凭证</li>
+          <li>舒适鞋</li>
+          <li>防晒用品</li>
+          <li>雨具</li>
+          <li>充电宝</li>
+          <li>常用药</li>
+          <li>保暖外套</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">长安一页</p>
+        <p>一份可以直接双击打开、离线阅读的西安自由行攻略。无广告、无外部图片与字体、无第三方脚本；适合出发前收藏，也适合在手机里随时翻看。</p>
+        <p class="footer-top"><a href="#top">回到顶部 ↑</a></p>
+      </div>
+      <div>
+        <p class="footer-note"><strong>免责声明：</strong>信息基准 2026-11。门票、开放时间、演出、班次与预约规则等动态信息，出行前请以景区及官方渠道最新公告为准。本站为静态攻略，不提供预订、实时票价或导航服务。</p>
+      </div>
+    </div>
+    <p class="footer-bottom">内容整理：长安一页 · 仅作旅行参考 · 不构成任何预订或服务承诺</p>
+  </div>
+</footer>
+
+<script>
+/* 移动端菜单：仅做渐进增强；脚本失败时导航仍默认可见。 */
+(function () {
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.getElementById('site-nav');
+  if (!toggle || !nav) return;
+
+  document.documentElement.classList.add('js-nav');
+  var label = toggle.querySelector('.nav-toggle-label');
+
+  function setOpen(open) {
+    nav.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? '关闭导航菜单' : '打开导航菜单');
+    if (label) label.textContent = open ? '关闭' : '菜单';
+  }
+
+  toggle.addEventListener('click', function () {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  nav.addEventListener('click', function (e) {
+    if (e.target instanceof Element && e.target.closest('a')) setOpen(false);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!nav.classList.contains('is-open')) return;
+    if (nav.contains(e.target) || toggle.contains(e.target)) return;
+    setOpen(false);
+  });
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 640) setOpen(false);
+  });
+})();
+</script>
+<script>
+/* 入场动效：不支持 IntersectionObserver 或用户要求减少动效时直接显示。 */
+(function () {
+  var items = document.querySelectorAll('.reveal');
+  if (!items.length) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function showAll() {
+    for (var i = 0; i < items.length; i++) items[i].classList.add('is-visible');
+  }
+  if (reduce || !('IntersectionObserver' in window)) {
+    showAll();
+    window.__revealReady = true;
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+  for (var j = 0; j < items.length; j++) io.observe(items[j]);
+  window.__revealReady = true;
+})();
+</script>
+<script>
+/* 兜底：若入场脚本异常，1.5 秒后显示全部内容，避免正文被隐藏。 */
+window.setTimeout(function () {
+  if (window.__revealReady) return;
+  var items = document.querySelectorAll('.reveal');
+  for (var i = 0; i < items.length; i++) items[i].classList.add('is-visible');
+}, 1500);
+</script>
+</body>
+</html>
